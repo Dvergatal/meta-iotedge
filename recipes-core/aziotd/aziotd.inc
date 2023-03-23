@@ -1,5 +1,5 @@
-DEPENDS += "openssl virtual/docker aziotctl aziot-keys tpm2-tss clang-native libtss2"
-RDEPENDS:${PN} += "docker libtss2 libtss2-mu libtss2-tcti-device aziot-keys"
+DEPENDS += "openssl virtual/docker aziotctl aziot-keys clang-native tpm2-abrmd"
+RDEPENDS:${PN} += "docker aziot-keys tpm2-abrmd"
 TOOLCHAIN = "clang"
 
 inherit systemd 
@@ -71,7 +71,7 @@ USERADD_PACKAGES = "${PN}"
 USERADD_PARAM:${PN} = "-r -g aziotcs -c 'aziot-certd user' -G aziotks -s /sbin/nologin -d ${localstatedir}/lib/aziot/certd aziotcs; "
 USERADD_PARAM:${PN} += "-r -g aziotks -c 'aziot-keyd user' -s /sbin/nologin -d ${localstatedir}/lib/aziot/keyd aziotks; "
 USERADD_PARAM:${PN} += "-r -g aziotid -c 'aziot-identityd user' -G aziotcs,aziotks,aziottpm -s /sbin/nologin -d ${localstatedir}/lib/aziot/identityd aziotid; "
-USERADD_PARAM:${PN} += "-r -g aziottpm -c 'aziot-tpmd user' -s /sbin/nologin -d ${localstatedir}/lib/aziot/tpmd aziottpm; "
+USERADD_PARAM:${PN} += "-r -g aziottpm -c 'aziot-tpmd user' -G tss -s /sbin/nologin -d ${localstatedir}/lib/aziot/tpmd aziottpm; "
 
 GROUPADD_PARAM:${PN} = "-r aziotcs; "
 GROUPADD_PARAM:${PN} += "-r aziotks; "
