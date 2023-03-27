@@ -1,5 +1,5 @@
 DEPENDS += "openssl virtual/docker aziotctl aziot-keys clang-native tpm2-abrmd"
-RDEPENDS:${PN} += "docker aziot-keys tpm2-abrmd"
+RDEPENDS:${PN} += "docker aziotctl aziot-keys tpm2-abrmd"
 TOOLCHAIN = "clang"
 
 inherit systemd 
